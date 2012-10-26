@@ -464,7 +464,13 @@ slowlog-max-len 128
 # Hashes are encoded using a memory efficient data structure when they have a
 # small number of entries, and the biggest entry does not exceed a given
 # threshold. These thresholds can be configured using the following directives.
-<% hmz_suffix = version.match('^([0-9]+\.[0-9]+)')[0].to_f < 2.6 ? 'map' : 'list' %>
+
+<%
+  # h-m-zip"map" replaced by h-m-zip"list" in 2.6
+  # (https://raw.github.com/antirez/redis/2.6/00-RELEASENOTES)
+  # so unless version is numeric and less than 2.6 use the newer names
+  hmz_suffix = ("#{version}".match('^([0-9]+\.[0-9]+)') || ['2.6'])[0].to_f < 2.6 ? 'map' : 'list'
+%>
 hash-max-zip<%= hmz_suffix %>-entries 512
 hash-max-zip<%= hmz_suffix %>-value 64
 
