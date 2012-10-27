@@ -7,12 +7,21 @@ class redis::server($ensure=present,
                     $masterport=6379,
                     $masterauth="",
                     $requirepass="",
+                    $service_enable = 'UNSET',
                     $aof=false,
                     $aof_auto_rewrite_percentage=100,
                     $aof_auto_rewrite_min_size="64mb") {
 
   $is_present = $ensure == "present"
   $is_absent = $ensure == "absent"
+
+  if $service_enable == 'UNSET' {
+    $service_enable_real = $is_present
+  }
+  else {
+    $service_enable_real = $service_enable
+  }
+
   $bin_dir = '/usr/local/bin'
   $redis_home = "/var/lib/redis"
   $redis_log = "/var/log/redis"
@@ -109,7 +118,7 @@ class redis::server($ensure=present,
 
   service { "redis-server":
     ensure => $is_present,
-    enable => $is_present,
+    enable => $service_enable_real,
     pattern => "${bin_dir}/redis-server",
     hasrestart => true,
     subscribe => $ensure ? {
