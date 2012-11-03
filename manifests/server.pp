@@ -1,6 +1,6 @@
 class redis::server($ensure=present,
-                    $version='2.4.5',
-                    $tar_version="2.4.5",
+                    $version     = '2.6.0',
+                    $tar_version = '2.6.0',
                     $bind="127.0.0.1",
                     $port=6379,
                     $masterip="",
