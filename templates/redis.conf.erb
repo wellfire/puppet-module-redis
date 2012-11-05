@@ -147,7 +147,7 @@ dir /var/lib/redis
 # different interval, or to listen to another port, and so on.
 #
 # slaveof <masterip> <masterport>
-<% if masterip.any? -%>
+<% if !masterip.empty? -%>
 slaveof <%= masterip %> <%= masterport %>
 <% end -%>
 
@@ -157,7 +157,7 @@ slaveof <%= masterip %> <%= masterport %>
 # refuse the slave request.
 #
 # masterauth <master-password>
-<% if masterauth.any? -%>
+<% if !masterauth.empty? -%>
 masterauth <%= masterauth %>
 <% end -%>
 
@@ -234,7 +234,7 @@ slave-priority 100
 # use a very strong password otherwise it will be very easy to break.
 #
 # requirepass foobared
-<% if requirepass.any? -%>
+<% if !requirepass.empty? -%>
 requirepass <%= requirepass %>
 <% end -%>
 
