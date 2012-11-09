@@ -117,7 +117,7 @@ class redis::server($ensure=present,
   }
 
   service { "redis-server":
-    ensure => $is_present,
+    ensure => $service_enable_real,
     enable => $service_enable_real,
     pattern => "${bin_dir}/redis-server",
     hasrestart => true,
