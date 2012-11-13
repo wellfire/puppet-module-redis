@@ -291,6 +291,10 @@ requirepass <%= requirepass %>
 # output buffers (but this is not needed if the policy is 'noeviction').
 #
 # maxmemory <bytes>
+<% if maxmemory -%>
+maxmemory <%= maxmemory %>
+<% end -%>
+
 
 # MAXMEMORY POLICY: how Redis will select what to remove when maxmemory
 # is reached? You can select among five behavior:
@@ -314,6 +318,7 @@ requirepass <%= requirepass %>
 # The default is:
 #
 # maxmemory-policy volatile-lru
+maxmemory-policy <%= maxmemory_policy %>
 
 # LRU and minimal TTL algorithms are not precise algorithms but approximated
 # algorithms (in order to save memory), so you can select as well the sample

@@ -10,7 +10,9 @@ class redis::server($ensure=present,
                     $service_enable = 'UNSET',
                     $aof=false,
                     $aof_auto_rewrite_percentage=100,
-                    $aof_auto_rewrite_min_size="64mb") {
+                    $aof_auto_rewrite_min_size="64mb"
+                    $maxmemory=false,
+                    $maxmemory_policy="volatile-lru") {
 
   $is_present = $ensure == "present"
   $is_absent = $ensure == "absent"
